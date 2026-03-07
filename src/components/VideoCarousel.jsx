@@ -26,16 +26,16 @@ const VideoCarousel = () => {
   // Use useEffect instead of useGSAP
   useEffect(() => {
     // Slider animation
-    gsap.to("#slider", {
+    gsap.to(".slider", {
       transform: `translateX(${-100 * videoId}%)`,
       duration: 2,
       ease: "power2.inOut",
     });
 
     // Video animation when in view
-    gsap.to("#video", {
+    gsap.to(".video", {
       scrollTrigger: {
-        trigger: "#video",
+        trigger: "video",
         toggleActions: "restart none none none",
       },
       onComplete: () => {
@@ -95,7 +95,7 @@ const VideoCarousel = () => {
   }, [videoId, startPlay]);
 
   useEffect(() => {
-    if (loadedData.length > 3) {
+    if (loadedData.length === hightlightsSlides.length) {
       if (!isPlaying) videoRef.current[videoId].pause();
       else startPlay && videoRef.current[videoId].play();
     }
@@ -127,15 +127,15 @@ const VideoCarousel = () => {
     <>
       <div className="flex items-center">
         {hightlightsSlides.map((list, i) => (
-          <div key={list.id} id="slider" className="sm:pr-20 pr-10">
+          <div key={list.id} className="slider sm:pr-20 pr-10">
             <div className="video-carousel_container">
               <div className="w-full h-full flex-center rounded-3xl overflow-hidden bg-black">
                 <video
-                  id="video"
                   playsInline
-                  className={`${list.id === 2 && "translate-x-44"} pointer-events-none`}
+                  className={`video ${list.id === 2 ? "translate-x-44" : ""} pointer-events-none`}
                   preload="auto"
                   muted
+                  autoPlay
                   ref={(el) => (videoRef.current[i] = el)}
                   onEnded={() =>
                     i !== 3
