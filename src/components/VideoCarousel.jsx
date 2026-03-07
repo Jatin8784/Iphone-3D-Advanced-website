@@ -63,8 +63,8 @@ const VideoCarousel = () => {
                 window.innerWidth < 760
                   ? "10vw"
                   : window.innerWidth < 1200
-                  ? "10vw"
-                  : "4vw",
+                    ? "10vw"
+                    : "4vw",
             });
             gsap.to(span[videoId], {
               width: `${currentProgress}%`,
@@ -85,7 +85,7 @@ const VideoCarousel = () => {
       const animUpdate = () => {
         anim.progress(
           videoRef.current[videoId].currentTime /
-            hightlightsSlides[videoId].videoDuration
+            hightlightsSlides[videoId].videoDuration,
         );
       };
 
@@ -95,7 +95,7 @@ const VideoCarousel = () => {
   }, [videoId, startPlay]);
 
   useEffect(() => {
-    if (loadedData.length > 3) {
+    if (loadedData.length === hightlightsSlides.length) {
       if (!isPlaying) videoRef.current[videoId].pause();
       else startPlay && videoRef.current[videoId].play();
     }
@@ -121,8 +121,7 @@ const VideoCarousel = () => {
     }
   };
 
-  const handleLoadedMetaData = (i, e) =>
-    setLoadedData((pre) => [...pre, e]);
+  const handleLoadedMetaData = (i, e) => setLoadedData((pre) => [...pre, e]);
 
   return (
     <>
@@ -188,8 +187,8 @@ const VideoCarousel = () => {
               isLastVideo
                 ? () => handleProcess("video-reset")
                 : !isPlaying
-                ? () => handleProcess("play")
-                : () => handleProcess("pause")
+                  ? () => handleProcess("play")
+                  : () => handleProcess("pause")
             }
           />
         </button>
