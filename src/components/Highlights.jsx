@@ -2,7 +2,7 @@ import gsap from "gsap"
 import { useEffect } from "react"
 import { rightImg, watchImg } from "../utils"
 
-// import VideoCarousel from './VideoCarousel';
+import VideoCarousel from './VideoCarousel';
 
 const Highlights = () => {
   useEffect(() => {
@@ -33,7 +33,7 @@ const Highlights = () => {
           </div>
         </div>
 
-        {/* <VideoCarousel /> */}
+        <VideoCarousel />
       </div>
     </section>
   )
