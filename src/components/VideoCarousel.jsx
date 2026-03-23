@@ -95,9 +95,12 @@ const VideoCarousel = () => {
   }, [videoId, startPlay]);
 
   useEffect(() => {
-    if (loadedData.length === hightlightsSlides.length) {
-      if (!isPlaying) videoRef.current[videoId].pause();
-      else startPlay && videoRef.current[videoId].play();
+    if (loadedData.length > 3) {
+      if (!isPlaying) {
+        videoRef.current[videoId].pause();
+      } else {
+        startPlay && videoRef.current[videoId].play();
+      }
     }
   }, [startPlay, videoId, isPlaying, loadedData]);
 
@@ -127,12 +130,12 @@ const VideoCarousel = () => {
     <>
       <div className="flex items-center">
         {hightlightsSlides.map((list, i) => (
-          <div key={list.id} className="slider sm:pr-20 pr-10">
+          <div key={list.id} className="slider flex-none sm:pr-20 pr-10">
             <div className="video-carousel_container">
               <div className="w-full h-full flex-center rounded-3xl overflow-hidden bg-black">
                 <video
                   playsInline
-                  className={`video ${list.id === 2 ? "translate-x-44" : ""} pointer-events-none`}
+                  className={`video w-full h-full object-cover ${list.id === 2 ? "translate-x-44" : ""} pointer-events-none`}
                   preload="auto"
                   muted
                   autoPlay
